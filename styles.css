@@ -112,10 +112,6 @@ th {
   color: var(--blue);
 }
 
-/* th {
-  background-color: #e2e2e2;
-} */
-
 @media only screen and (max-width: 900px) {
   .country-list {
     grid-template-columns: repeat(5, 1fr);
@@ -129,7 +125,7 @@ th {
 
   .flag-container {
     padding: 2rem 1rem;
-    width: 80%;
+    width: 85%;
   }
   
   .flag {
