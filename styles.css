@@ -129,11 +129,11 @@ th {
 
   .flag-container {
     padding: 2rem 1rem;
-    width: 80%;
+    width: 70%;
   }
   
   .flag {
-    width: 500px;
+    width: 450px;
     height: 300px;
   }
 }
