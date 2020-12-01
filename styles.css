@@ -50,6 +50,7 @@ body {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   text-align: center;
+  width: 100%;
 }
 
 .country-list li {
