@@ -54,7 +54,7 @@ body {
 
 .country-list li {
   list-style: none;
-  font-size: 18px;
+  font-size: 19px;
   cursor: pointer;
   background-color: #e9e9e9;
   padding: .5rem;
@@ -113,6 +113,11 @@ th, td {
 
 th {
   color: var(--blue);
+  font-size: 20px;
+}
+
+td {
+  font-size: 18px;
 }
 
 @media only screen and (max-width: 900px) {
@@ -128,6 +133,6 @@ th {
 
   .flag-container {
     width: 85%;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
