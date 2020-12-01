@@ -129,18 +129,12 @@ th {
   }
   
   .flag {
-    width: 400px;
-    height: 200px;
+    width: 95%;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .flag-container {
     padding: 1rem;
-  }
-
-  .flag {
-    width: 300px;
-    height: 150px;
   }
 }
