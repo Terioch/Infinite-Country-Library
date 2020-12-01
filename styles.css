@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
 :root {
-  --header: #57A0CA;
-  --table: #e8e8e8;
-  --flagContainer: #2e84a7;
-  --green: #5ba51a;
-  --blue: #1c9ed1; 
+  --header: #0E1E25;
+  --body: #c4c4c4;
+  --dropdown: #dddddd;
+  --nav: #e9e9e9;
+  --navHover: #d8d8d8;
+  --navText: #333; 
+  --flagContainer: #2c3e46;
+  --tableLight: #e9e9e9;
+  --tableDark: #dddddd;
+  --whiteText: #f1f1f1;
+  --blueText: #1c9ed1; 
+  --fadedText: #b1bcc0;
 }
 
 * {
@@ -16,21 +23,24 @@
 }
 
 body {
-  background-color: var(--green);
+  background-color: var(--body);
 }
 
 .header {
-  background-color: #57A0CA;
+  background-color: var(--header);
   text-align: center;
 }
 
 .title {
   padding: 1rem;
   font-size: 36px;
+  color: var(--fadedText);
+  letter-spacing: 1px;
 }
 
 .desc {
   font-size: 20px;
+  color: var(--whiteText);
 }
 
 /* main content section */
@@ -42,8 +52,8 @@ body {
   margin: 1rem 0;
   font-size: 20px;
   padding: .2rem;
-  background-color: #e9e9e9;
-  color: var(--blue);
+  background-color: var(--dropdown);
+  cursor: pointer;
 }
 
 .country-list {
@@ -57,9 +67,9 @@ body {
   list-style: none;
   font-size: 19px;
   cursor: pointer;
-  background-color: #e9e9e9;
+  background-color: var(--nav);
   padding: .5rem;
-  color: var(--blue);
+  color: var(--navText);
   border-radius: 5px;
   margin: .2rem;
   letter-spacing: 1px;
@@ -69,7 +79,8 @@ body {
 }
 
 .country-list li:hover {
-  background-color: #d8d8d8;
+  background-color: var(--navHover);
+  color: var(--blueText);
 }
 
 /* style flag image */
@@ -94,7 +105,7 @@ body {
   width: 500px;
   display: none;
   margin: auto;
-  background-color: var(--table);
+  background-color: var(--tableLight);
   overflow-x: auto;
 }
 
@@ -105,7 +116,7 @@ body {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: var(--tableDark);
 }
 
 th, td {
@@ -113,7 +124,7 @@ th, td {
 }
 
 th {
-  color: var(--blue);
+  color: var(--blueText);
   font-size: 20px;
 }
 
