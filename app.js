@@ -97,7 +97,6 @@ class Country {
             let temp = []
             // iterate over object within object value array and output name
             for (let item of tableData[tableDataArr[i]]) {
-              console.log("language")
               temp.push(item.name) // push name value onto array
             }
             this.tableCells[i].textContent = temp.join(', ')
