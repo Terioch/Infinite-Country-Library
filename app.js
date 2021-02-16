@@ -1,4 +1,3 @@
-// note-to-self: Structure in an object oriented fashion
 class Country {
   // instantiate a class blueprint
   constructor() {
@@ -94,9 +93,20 @@ class Country {
         }
         else if (tableDataArr[i] === 'currencies' || tableDataArr[i] === 'languages' || tableDataArr[i] === 'translations') {
           // output object values containing objects in JSON string format
-          this.tableCells[i].textContent = JSON.stringify(tableData[tableDataArr[i]])
+          if (tableDataArr[i] === 'languages') {
+            let temp = []
+            // iterate over object within object value array and output name
+            for (let item of tableData[tableDataArr[i]]) {
+              temp.push(item.name) // push name value onto array
+            }
+            this.tableCells[i].textContent = temp.join(', ')
+          } else {
+            this.tableCells[i].textContent = JSON.stringify(tableData[tableDataArr[i]]).split(', ')
+          }
         } else {
-          this.tableCells[i].textContent = tableData[tableDataArr[i]]
+          // insert object value into table cell with separation for arrays
+          Array.isArray(tableData[tableDataArr[i]]) ? this.tableCells[i].textContent = tableData[tableDataArr[i]].join(', ')
+            : this.tableCells[i].textContent = tableData[tableDataArr[i]]
         }
       }           
     }
