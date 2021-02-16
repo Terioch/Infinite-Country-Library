@@ -1,1 +1,0 @@
-A dropdown menu displays a list of letters A-Z, each of which represents the first character of a countries name. From there, a list of countries is displayed for that specific letter. Clicking on any one country will display text information in the form of a table as well as an image of the country flag.
