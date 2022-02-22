@@ -11,7 +11,7 @@ class Country {
 
 	// events
 	events() {
-		this.dropdown.onchange = () => {
+		this.dropdown.onclick = () => {
 			if (this.dropdown.value.length == 1) this.getCountryNames();
 		};
 	}
@@ -22,7 +22,6 @@ class Country {
 
 		while (ascii <= 90) {
 			let element = document.createElement("option"); // create new option
-
 			// insert letter into new option element and append onto dropdown
 			element.textContent = String.fromCharCode(ascii);
 			this.dropdown.appendChild(element);
@@ -72,16 +71,21 @@ class Country {
 	// fetch data from specific country
 	async getCountryData(country) {
 		try {
-			// const response = await fetch(
-			// 	`http://api.countrylayer.com/v2/name/${country}?access_key=627b90083cdb18bfd7935645a501eb36?fullText=true`
-			// );
+			const x = await fetch(
+				`https://restfulcountries.com/api/v1/countries/Nigeria`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			console.log(await x.json());
 			const response = await fetch(
 				`http://api.worldbank.org/v2/country/${country.isoCode}?format=json`
 			);
 			const data = await response.json();
-			console.log(data[1][0].capitalCity);
 			this.displayDataInTable(data[1][0]);
-			// this.countryTable.style.display = "table"; // display country table
 		} catch (e) {
 			console.error("Failed to fetch country.", e);
 		}
@@ -91,57 +95,54 @@ class Country {
 	displayDataInTable(country) {
 		console.log(country);
 		document.querySelector(".info-container").innerHTML = `
-      <ul class="d-flex flex-wrap">
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Name</p>
-          <p>${country.name}</p>  
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Iso Code</p>
-          <p>${country.iso2Code}</p>  
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Capital City</p>
-          <p>${country.capitalCity || "none"}</p>      
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Region</p>
-          <p>${country.region.value || "none"}</p>      
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Population</p>
-          <p>Available Soon</p>      
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Income Level</p>
-          <p>${country.incomeLevel.value || "none"}</p>      
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Latitude</p>
-          <p>${country.latitude || "none"}</p>      
-        </li>        
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Longitude</p>
-          <p>${country.longitude || "none"}</p>      
-        </li>        
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Currencies</p>
-          <p>Available Soon</p>      
-        </li>
-        <li class="list-group-item list-group-item-light rounded-0 border-start-0 border-top-0 border-bottom-0">
-          <p class="fw-bold mb-1">Langauges</p>
-          <p>Available Soon</p>      
-        </li>
-      </ul>
-    `;
+		  <div class="country-info-grid row">        
+        <div class="country-info-item-light col-12 col-md-4 col-sm-6 d-flex flex-column justify-content-center p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Country Name</h2>
+          <p class="country-info-text" class="country-info-text">${
+						country.name
+					}</p>
+        </div>       
+        <div class="country-info-item-dark col-12 col-md-4 col-sm-6 d-flex flex-column justify-content-center p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">ISO alpha-2 code</h2>
+          <p class="country-info-text">${country.iso2Code}</p>
+        </div>      
+        <div class="country-info-item-light col-12 col-md-4 col-sm-6 d-flex flex-column justify-content-center p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Capital</h2>
+          <p class="country-info-text">${country.capitalCity || "none"}</p>
+        </div>       
+        <div class="country-info-item-dark col-12 col-md-4 col-sm-6 p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Region</h2>
+          <p class="country-info-text">${country.region.value || "none"}</p>
+        </div>       
+        <div class="country-info-item-light col-12 col-md-4 col-sm-6 p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Lending Type</h2>
+          <p class="country-info-text">${country.lendingType.value}</p>
+        </div>       
+        <div class="country-info-item-dark col-12 col-md-4 col-sm-6 p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Income Level</h2>
+          <p class="country-info-text">${
+						country.incomeLevel.value || "none"
+					}</p>
+        </div>     
+        <div class="country-info-item-light col-12 col-md-4 col-sm-6 p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Latitude</h2>
+          <p class="country-info-text">${country.latitude || "none"}</p>
+        </div>       
+        <div class="country-info-item-dark col-12 col-md-4 col-sm-6 p-3 border">
+          <h2 class="country-info-title fs-5 fw-bold">Longitude</h2>
+          <p class="country-info-text">${country.longitude || "none"}</p>
+        </div>                          
+      </div>
+		`;
+		this.countryList.innerHTML = "";
 		// document.querySelector(".info-container").innerHTML = `
-		//   <table class="country-table">
+		//   <table class="table country-table" style="display: table">
 		//     <tr>
-		//       <th>Name</th>
+		//       <th >Name</th>
 		//       <td>${country.name}</td>
 		//     </tr>
 		//     <tr>
-		//       <th>Name</th>
+		//       <th>ISO alpha-2 code</th>
 		//       <td>${country.iso2Code}</td>
 		//     </tr>
 		//     <tr>
@@ -150,7 +151,7 @@ class Country {
 		//     </tr>
 		//     <tr>
 		//       <th>Region</th>
-		//       <td>${country.region.value}</td>
+		//       <td>${country.region.value || "none"}</td>
 		//     </tr>
 		//     <tr>
 		//       <th>Population</th>
@@ -158,11 +159,15 @@ class Country {
 		//     </tr>
 		//     <tr>
 		//       <th>Income Level</th>
-		//       <td>${country.incomeLevel.value}</td>
+		//       <td>${country.incomeLevel.value || "none"}</td>
 		//     </tr>
 		//     <tr>
-		//       <th>Latitude/longitude</th>
-		//       <td>${country.latitude} / ${country.longitude}</td>
+		//       <th>Latitude</th>
+		//       <td>${country.latitude || "none"}</td>
+		//     </tr>
+		//     <tr>
+		//       <th>Longitude</th>
+		//       <td>${country.longitude || "none"}</td>
 		//     </tr>
 		//     <tr>
 		//       <th>Timezones</th>
