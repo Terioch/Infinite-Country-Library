@@ -137,7 +137,7 @@ class Country {
           <p class="info-text">${country.name}</p>
         </div>       
         <div class="info-item-dark col-12 col-md-4 col-sm-6 d-flex flex-column justify-content-center p-3 border">
-          <h2 class="info-title fs-5 fw-bold">ISO alpha-2 code</h2>
+          <h2 class="info-title fs-5 fw-bold">ISO Alpha-2 Code</h2>
           <p class="info-text">${country.iso2Code}</p>
         </div>      
         <div class="info-item-light col-12 col-md-4 col-sm-6 d-flex flex-column justify-content-center p-3 border">
