@@ -82,7 +82,7 @@ class Country {
 			lendingType: wbData.lendingType || "Not Applicable",
 			latitude: wbData.latitude || "Not Applicable",
 			longitude: wbData.longitude || "Not Applicable",
-			flag: rcData.href?.flag || "./images/fake-flag.jpg",
+			flag: `https://countryflagsapi.com/png/${wbData.iso2Code}`,
 		};
 	}
 
@@ -190,87 +190,14 @@ class Country {
 		`;
 		this.countryList.innerHTML = "";
 	}
-	// displayDataInTable(data) {
-	// 	// extract desired properties from country data
-	// 	const tableData = this.extractData(data, [
-	// 		"name",
-	// 		"capital",
-	// 		"area",
-	// 		"region",
-	// 		"subregion",
-	// 		"population",
-	// 		"borders",
-	// 		"timezones",
-	// 		"languages",
-	// 		"currencies",
-	// 		"demonym",
-	// 		"latlng",
-	// 		"gini",
-	// 		"nativeName",
-	// 		"numericCode",
-	// 		"translations",
-	// 		"flag",
-	// 	]); // array of desired keys
-
-	// 	let tableDataArr = Object.keys(tableData); // initialise new object as array
-
-	// 	// iterate over table data array
-	// 	for (let i = 0; i < tableDataArr.length; ++i) {
-	// 		// insert value of current object property into appropriate table cell
-	// 		if (
-	// 			tableData[tableDataArr[i]] === null ||
-	// 			tableData[tableDataArr[i]].length < 1
-	// 		) {
-	// 			this.tableCells[i].textContent = "No " + tableDataArr[i];
-	// 		} else {
-	// 			if (tableDataArr[i] === "flag") {
-	// 				this.renderFlag(tableData.flag);
-	// 			} else if (
-	// 				tableDataArr[i] === "currencies" ||
-	// 				tableDataArr[i] === "languages" ||
-	// 				tableDataArr[i] === "translations"
-	// 			) {
-	// 				// output object values containing objects in JSON string format
-	// 				if (tableDataArr[i] === "languages") {
-	// 					let temp = [];
-	// 					// iterate over object within object value array and output name
-	// 					for (let item of tableData[tableDataArr[i]]) {
-	// 						temp.push(item.name); // push name value onto array
-	// 					}
-	// 					this.tableCells[i].textContent = temp.join(", ");
-	// 				} else {
-	// 					this.tableCells[i].textContent = JSON.stringify(
-	// 						tableData[tableDataArr[i]]
-	// 					).split(", ");
-	// 				}
-	// 			} else {
-	// 				// insert object value into table cell with separation for arrays
-	// 				Array.isArray(tableData[tableDataArr[i]])
-	// 					? (this.tableCells[i].textContent =
-	// 							tableData[tableDataArr[i]].join(", "))
-	// 					: (this.tableCells[i].textContent = tableData[tableDataArr[i]]);
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// extracts and stores neccessary data from GET request within new object
-	extractData(data, keys) {
-		const newData = {};
-		// store key/property within new object if included in keys array
-		Object.keys(data[0]).forEach((key) => {
-			if (keys.includes(key)) {
-				newData[key] = data[0][key];
-			}
-		});
-		return newData;
-	}
 
 	// renders image with specified dimension and size values
 	renderFlag(flag) {
 		const flagContainer = document.querySelector(".flag-container");
 		flagContainer.innerHTML = `
       <img class="flag" src="${flag}" alt="Flag of source: ${flag} cannot be rendered">`;
+		const image = document.querySelector(".flag");
+		image.onerror = () => (image.src = "./images/fake-flag.jpg"); // Replace image source if original is invalid
 		flagContainer.style.display = "block"; // display container for flag
 	}
 }
