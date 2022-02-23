@@ -32,7 +32,7 @@ class Country {
 	async getCountryNames() {
 		try {
 			const response = await fetch(
-				"http://api.worldbank.org/v2/country?per_page=299&format=json"
+				"https://api.worldbank.org/v2/country?per_page=299&format=json"
 			);
 			const data = await response.json();
 
@@ -103,7 +103,7 @@ class Country {
 	async getWorldBankData(country) {
 		try {
 			const response = await fetch(
-				`http://api.worldbank.org/v2/country/${country.iso2Code}?format=json`
+				`https://api.worldbank.org/v2/country/${country.iso2Code}?format=json`
 			);
 			const data = await response.json();
 			return data[1][0] || {};
