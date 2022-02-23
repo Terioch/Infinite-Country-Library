@@ -21,23 +21,19 @@ class Country {
 		let ascii = 65;
 
 		while (ascii <= 90) {
-			let element = document.createElement("option"); // create new option
 			// insert letter into new option element and append onto dropdown
+			let element = document.createElement("option");
 			element.textContent = String.fromCharCode(ascii);
 			this.dropdown.appendChild(element);
 			ascii++;
 		}
 	}
 
-	// fetch data from restcountries API
 	async getCountryNames() {
 		try {
 			const response = await fetch(
 				"http://api.worldbank.org/v2/country?per_page=299&format=json"
 			);
-			// const response = await fetch(
-			// 	`http://api.countrylayer.com/v2/all?access_key=627b90083cdb18bfd7935645a501eb36`
-			// );
 			const data = await response.json();
 
 			// retrieve all country names and iso2 codes
@@ -67,7 +63,6 @@ class Country {
 		}
 	}
 
-	// create the country data view model
 	createCountryViewModel(wbData, rcData) {
 		return {
 			name: wbData.name || "Not Applicable",
@@ -82,7 +77,7 @@ class Country {
 			lendingType: wbData.lendingType || "Not Applicable",
 			latitude: wbData.latitude || "Not Applicable",
 			longitude: wbData.longitude || "Not Applicable",
-			flag: `https://countryflagsapi.com/png/${wbData.iso2Code}`,
+			flagSrc: `https://countryflagsapi.com/png/${wbData.iso2Code}`,
 		};
 	}
 
@@ -117,24 +112,23 @@ class Country {
 		}
 	}
 
-	// fetch data for an individual country
 	async getCountryData(initialCountry) {
 		const worldBankData = await this.getWorldBankData(initialCountry);
 		const restfulCountriesData = await this.getRestfulCountriesData(
 			initialCountry
 		);
 
-		// Merge and filter data sets into a single object
+		// Merge and extract data sets into a single country object
 		const country = this.createCountryViewModel(
 			worldBankData,
 			restfulCountriesData
 		);
 		console.log({ country });
-		this.renderFlag(country.flag);
+		this.renderFlag(country.flagSrc);
 		this.displayDataInTable(country);
 	}
 
-	// display data for corresponding country within a table
+	// display data for corresponding country
 	displayDataInTable(country) {
 		document.querySelector(".info-container").innerHTML = `
 		  <div class="row">        
@@ -188,17 +182,17 @@ class Country {
         </div>                          
       </div>
 		`;
-		this.countryList.innerHTML = "";
+		this.countryList.innerHTML = ""; // Empty country list once data is rendered
 	}
 
-	// renders image with specified dimension and size values
-	renderFlag(flag) {
+	// render flag image
+	renderFlag(flagSrc) {
 		const flagContainer = document.querySelector(".flag-container");
-		flagContainer.innerHTML = `
-      <img class="flag" src="${flag}" alt="Flag of source: ${flag} cannot be rendered">`;
-		const image = document.querySelector(".flag");
-		image.onerror = () => (image.src = "./images/fake-flag.jpg"); // Replace image source if original is invalid
-		flagContainer.style.display = "block"; // display container for flag
+		const flagImage = document.querySelector(".flag");
+		const flagImageHTML = `<img class="flag" src="${flagSrc}" alt="Flag of source: ${flagSrc} cannot be rendered">`;
+		flagContainer.innerHTML = flagImageHTML;
+		flagImage.onerror = () => (flagImage.src = "./images/fake-flag.jpg"); // replace image source if original is invalid
+		flagContainer.style.display = "block"; // display flag container
 	}
 }
 

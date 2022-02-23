@@ -53,14 +53,6 @@ body {
 }
 
 /* main content section */
-.content-container {
-	margin: 0;
-	padding-top: 0;
-}
-/* .content-container > * {
-	margin-bottom: 2rem;
-} */
-
 .country-list {
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
@@ -95,6 +87,7 @@ body {
 	display: none;
 	width: 625px;
 	margin: auto;
+	margin-bottom: 2rem;
 	text-align: center;
 	border-radius: 10px;
 }
@@ -108,7 +101,7 @@ body {
 /* country info section */
 .info-container {
 	max-width: 1000px;
-	margin: 0 auto;
+	margin: auto;
 }
 
 .info-item-light {
