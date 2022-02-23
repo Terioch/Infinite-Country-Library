@@ -188,9 +188,9 @@ class Country {
 	// render flag image
 	renderFlag(flagSrc) {
 		const flagContainer = document.querySelector(".flag-container");
-		const flagImage = document.querySelector(".flag");
 		const flagImageHTML = `<img class="flag" src="${flagSrc}" alt="Flag of source: ${flagSrc} cannot be rendered">`;
 		flagContainer.innerHTML = flagImageHTML;
+		const flagImage = document.querySelector(".flag");
 		flagImage.onerror = () => (flagImage.src = "./images/fake-flag.jpg"); // replace image source if original is invalid
 		flagContainer.style.display = "block"; // display flag container
 	}
